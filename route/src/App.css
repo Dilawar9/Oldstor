@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+.sidebar > li > a.active {
+  background-color:rgb(173, 173, 173);
+  display: inline-block;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+
+
+
