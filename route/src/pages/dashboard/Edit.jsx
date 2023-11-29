@@ -11,6 +11,7 @@ function Edit() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
+  const [image,setImage]=useState(null);
   const [loading, setLoading] = useState(false);
 
   const navegate=useNavigate();
@@ -37,22 +38,31 @@ function Edit() {
             setName(response.data.product.name)
             setPrice(response.data.product.price)
             setCategory(response.data.product.category)
+            setImage(response.data.product.image)
+          }
+          else{
+            alert("invalid data")
           }
         });
     },[]);
 
   const handleSubmit = () => {
-    console.log(name, price,category);
+    console.log(name, price,category,image);
 
-    if (name !== "" && price !== 0 && category!=="") {
+    if (name !== "" || price !== 0 || category!=="" || image!==null) {
     //  Edit product
       setLoading(true);
       axios
         .put(`http://localhost:3001/product/${params.id}`, {
           name: name,
           price: price,
-          category:category
+          category:category,
+          image:image
        
+        },{
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         })
         .then((res) => {
           console.log(res);
@@ -62,12 +72,15 @@ function Edit() {
               navegate("/dashboard")
             },2000)
             setName("");
-            setPrice("");
+            setPrice(0);
             setCategory("");
+            setImage(null);
           }
         })
         .catch((er) => {
+          alert(er.message);
           console.log(er.message);
+
         })
         .finally(() => setLoading(false));
     } else {
@@ -122,6 +135,17 @@ function Edit() {
               setCategory(e.target.value);
             }}
             placeholder="product Category"
+          />
+        </div>
+        <div className="mb-3">
+          <label id="image">Product Image</label>
+          <input
+            type="file"
+            id="image"
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+            }}
+            className="form-control"
           />
         </div>
 

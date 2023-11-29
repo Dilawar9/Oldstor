@@ -14,14 +14,14 @@ function Home(props) {
               return (
                 <div className="col-md-3 mb-3" key={index}>
                   <div className="card">
-                    <img
-                      src="https://picsum.photos/200/200"
-                      className="card-img-top"
+                    <img className="img"
+                      src={`http://127.0.0.1:3001/${element.image}`}
+                      // className="card-img-top"
                       alt="..."
                     />
                     <div className="card-body">
                       <Link to={`/details/${element._id}`}>
-                        <h5 className="card-title">{element.name}</h5>
+                        <h5 className="card-title"> Name:{element.name}</h5>
                       </Link>
 
                       <h6>Price: {element.price}</h6>

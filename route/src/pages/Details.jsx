@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Produt from "./dashboard/Produt";
 
 function Details(props) {
   const [product, setProduct] = useState(null);
@@ -39,7 +40,7 @@ function Details(props) {
         <div className="card mb-3 m-4">
         <div className="row g-0">
           <div className="col-md-4">
-            <img src="https://picsum.photos/200/200" className="img-fluid rounded-start" alt="..." />
+            <img src={`http://127.0.0.1:3001/${product.image}`} className="img-fluid rounded-start" alt="..." />
           </div>
           <div className="col-md-8">
             <div className="card-body">

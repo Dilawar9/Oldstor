@@ -96,42 +96,12 @@ function App() {
 
   }
 
-
   return (
     <div className="App">
-      {/* <h1>All Blog Posts</h1> */}
-      {/* <button onClick={getPosts}>Get Posts</button> */}
-
-      {/* <div className="container">
-        <div className="row">
-          {posts.length === 0 ? (
-            <div class="spinner-border text-danger" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          ) : null}
-          {posts.map((element, index) => {
-            return (
-              <div className="col-md-3 mb-3" key={element.id}>
-                <div className="card">
-                  <img src={element.image} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <h5 className="card-title">{element.name}</h5>
-                    <h6>Price: {element.price}</h6>
-                    <h6>Category: {element.category}</h6>
-                    <a href="-" className="btn btn-primary">
-                      Add To Cart
-                    </a>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div> */}
+     
       <Navbar card={card} />
       
-   
-     
+       
 
       {/* <Link to="/">Home</Link>-<Link to="/about">About</Link> */}
         <Routes>

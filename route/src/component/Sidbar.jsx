@@ -12,9 +12,9 @@ function Sidbar() {
         <li>
           <NavLink to="/dashboard/creat">Creat Product</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/dashboard/edit">Edit Product</NavLink>
-        </li>
+        </li> */}
       </ul>
     </>
   );

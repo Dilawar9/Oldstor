@@ -5,22 +5,21 @@ import { useState } from "react";
 const Fileupload = () => {
 
     // use on button
-    const [file ,setFile]=useState("")
+    const [image,setImage]=useState("")
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = () => {
     // get the selected file from the input
     // const file = event.target.files[0];
     // create a new FormData object and append the file to it
-    const formData = new FormData();
-    formData.set("image", file);
+    // const formData = new FormData();
+    // formData.set("image", file);
     // formData.append("image", file);
     // make a POST request to the File Upload API with the FormData object and Rapid API headers
-    axios
-      .post("http://localhost:3001/uploading", formData, {
+    axios.post("http://localhost:3001/uploading",  {
+      image:image
+  },{
         headers: {
           "Content-Type": "multipart/form-data",
-          "x-rapidapi-host": "file-upload8.p.rapidapi.com",
-          "x-rapidapi-key": "your-rapidapi-key-here",
         },
       })
       .then((response) => {
@@ -35,7 +34,7 @@ const Fileupload = () => {
   // render a simple input element with an onChange event listener that calls the handleFileUpload function
   return (
     <div>
-      <input type="file" onChange={(event)=>{setFile(event.target.files[0])}} />
+      <input type="file" onChange={(event)=>{setImage(event.target.files[0])}} />
       <button className="btn btn-primary" onClick={handleFileUpload} >Upload</button>
     </div>
   );

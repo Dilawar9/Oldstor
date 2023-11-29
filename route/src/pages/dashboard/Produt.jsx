@@ -72,10 +72,9 @@ function Produt(props) {
               <tr key={index}>
                 <td>{element._id}</td>
                 <td> <img style={{ width: "60px", height: "60px", borderRadius: "50%" }}
-                  src="https://picsum.photos/200/200"
+                  src={`http://127.0.0.1:3001/${element.image}`}
                   className="card-img-top"
-                  alt="..."
-                /></td>
+                  alt="..." /></td>
                 <td>{element.name}</td>
                 <td>{element.price}</td>
                 <td>{element.category}</td>
