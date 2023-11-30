@@ -26,11 +26,14 @@ function Home(props) {
 
                       <h6>Price: {element.price}</h6>
                       <h6>Category: {element.category}</h6>
+                    
                       <button className="btn btn-primary" onClick={() => {
                           props.addcard(element);
                         }}>
                         Add To Cart
                       </button>
+                      
+                      
                     </div>
                   </div>
                 </div>

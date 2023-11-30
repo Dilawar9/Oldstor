@@ -49,30 +49,6 @@ app.get('/', (req, res) => {
     res.status(200).send("welcom to express and node");
 })
 
-// app.post("/Product/create", async (req, res) => {
-
-//     // console.log( req.body )
-//     // return;
-//    const newProduct  =  await Product.create(req.body);
-
-//     res.status(201).json({
-//         newProduct: newProduct,
-//         message: "product created"
-//     })
-// });
-
-// app.post('/creat', (req, res) => {
-//     res.status(201,express.json({
-//         "name":"aslam",
-//         "class":"mcs"
-//     }))
-//     console.log(req.body)
-// })
-
-// app.get('/about', (req, res) => {
-//     res.status(201).json("pakistan zindabad")
-// })
-
 //  show all product
 app.get("/product", async (req, res) => {
     try {
@@ -156,23 +132,25 @@ app.post("/product", upload.single('image'), async (req, res) => {
 
 app.put("/product/:id", upload.single('image'), async (req, res) => {
     const id = req.params.id;
-    const extension = req.file.mimetype.split("/")[1];
-    if (extension == "png" || extension == "jpg" || extension == "jpeg") {
-        const fileNmae = req.file.filename + "." + extension;
-
-        // new key in body object
-        // req.body.image = fileNmae;
-        req.body.image = fileNmae;
-        fs.rename(req.file.path, `uploads/${fileNmae}`, () => {
-            console.log("\nFile Renamed!\n");
-        });
-    } else {
-        fs.unlink(req.file.path, () => console.log("file deleted"))
-        return res.json({
-            message: "only images are accepted"
-        })
-    }
     try {
+
+        const extension = req.file.mimetype.split("/")[1];
+        if (extension == "png" || extension == "jpg" || extension == "jpeg") {
+            const fileNmae = req.file.filename + "." + extension;
+
+            const oldimg = await Product.findById(id);
+            fs.unlink(`uploads/${oldimg.image}`, () => console.log("file deleted"))
+            req.body.image = fileNmae;
+            fs.rename(req.file.path, `uploads/${fileNmae}`, () => {
+                console.log("\nFile Renamed!\n");
+            });
+
+        } else {
+            fs.unlink(req.file.path, () => console.log("file deleted"))
+            return res.json({
+                message: "only images are accepted"
+            })
+        }
         const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
             runValidators: true,
             new: true
@@ -199,11 +177,13 @@ app.put("/product/:id", upload.single('image'), async (req, res) => {
 
 
 
-// delete by id
-app.delete("/product/:id", async (req, res) => {
+// delete by id with image
+app.delete("/product/:id", upload.single('image'), async (req, res) => {
     const id = req.params.id;
     try {
+        const oldimge = await Product.findById(id);
         await Product.findByIdAndDelete(id);
+        fs.unlink(`uploads/${oldimge.image}`, () => console.log("file deleted"))
         return res.status(200).json({
             status: true,
             message: "product succesfully deleted"
@@ -216,14 +196,11 @@ app.delete("/product/:id", async (req, res) => {
     }
 });
 
+
 mongoose.connect("mongodb://127.0.0.1:27017/produt").then(() => {
     app.listen(3001, () => {
         console.log("db connected and server is up now");
     })
 })
 
-
-// app.listen(3001, () => {
-//     console.log("server is listing port")
-// })
 

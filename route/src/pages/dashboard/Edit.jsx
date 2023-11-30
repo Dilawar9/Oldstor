@@ -137,6 +137,18 @@ function Edit() {
             placeholder="product Category"
           />
         </div>
+        {/* <div className="mb-3">
+          <label id="image">Product Image</label>
+          <input
+            type="text"
+            id="image"
+            value={image}
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+            }}
+            className="form-control"
+          />
+        </div> */}
         <div className="mb-3">
           <label id="image">Product Image</label>
           <input

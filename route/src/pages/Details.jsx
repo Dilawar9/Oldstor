@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Produt from "./dashboard/Produt";
+// import Produt from "./dashboard/Produt";
 
 function Details(props) {
   const [product, setProduct] = useState(null);

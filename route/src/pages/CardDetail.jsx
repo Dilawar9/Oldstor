@@ -36,9 +36,9 @@ function CartDetail(props) {
                       </small>
                     </p>
 
-                    <Link to="/dashboard">  <button className="btn btn-primary" onClick={() => {
+                     <button className="btn btn-primary" onClick={() => {
                       props.delete1(index);
-                    }}>Delete</button></Link>
+                    }}>Delete</button>
 
                   </div>
 
@@ -49,7 +49,9 @@ function CartDetail(props) {
             </div>
           )
         })}
+       
         <button className="btn btn-warning" onClick={() => props.reset()}>Reset</button>
+    
       <div>Grand Total: {total}</div>
     </div >
     </>
