@@ -10,7 +10,7 @@ function Creat() {
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [image, setImage] = useState(null);
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const navegate = useNavigate();
@@ -28,7 +28,7 @@ function Creat() {
     });
 
   const handleSubmit = () => {
-    console.log(name, price, category,image);
+    console.log(name, price, category, image);
 
     if (name !== "" && price !== 0 && category !== "" && image !== "null") {
       // create product
@@ -39,12 +39,12 @@ function Creat() {
         category: category,
         image: image
 
-      },{
+      }, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
-      
+
         .then((res) => {
           console.log(res);
           if (res.status === 201) {
@@ -101,27 +101,14 @@ function Creat() {
             placeholder="product name"
           />
         </div>
-        {/* <div className="mb-3">
-          <label id="category">category</label>
-          <input
-            type="text"
-            id="category"
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }}
-            className="form-control"
-            value={category}
-            placeholder="product category"
-          />
-        </div> */}
         <div className="mb-3">
-        <label id="category">category</label>
-            <select    onChange={(e) => {
-              setCategory(e.target.value);
-            }}  className="form-control" value={category} id="category">
-              <option value="Shirts">Shirts</option>
-              <option value="Pents">Pents</option>
-            </select>
+          <label id="category">category</label>
+          <select onChange={(e) => {
+            setCategory(e.target.value);
+          }} className="form-control" value={category} id="category">
+            <option value="Shirts">Shirts</option>
+            <option value="Pents">Pents</option>
+          </select>
         </div>
 
         <div className="mb-3">
@@ -134,7 +121,7 @@ function Creat() {
             }}
             className="form-control"
           />
-          {(errors.image) ? <div className="alert alert-danger py-1 mt-1"> {errors.image}</div> : null}
+          {/* {(errors.image) ? <div className="alert alert-danger py-1 mt-1"> {errors.image}</div> : null} */}
         </div>
 
 
