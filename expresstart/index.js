@@ -3,6 +3,10 @@ const app = express();
 const cors = require("cors")
 const mongoose = require("mongoose");
 const Product = require('./moduls/Product')
+const Usermodule=require("./moduls/Usermodule")
+const bcrypt = require("bcrypt");
+const secretKey = "42sfkl;jdf;o0923rujwefolkjsd";
+const jwt = require("jsonwebtoken");
 const path = require("path");
 
 const fs = require("fs");
@@ -196,6 +200,90 @@ app.delete("/product/:id", upload.single('image'), async (req, res) => {
     }
 });
 
+
+/////////////////////////
+
+// login and log out
+
+app.post("/signup", async (req, res) => {
+    const {username, email, password } = req.body;
+    try {
+
+        // check email is already registered or not
+        const alreadyUser = await Usermodule.findOne({ email: email });
+        if (alreadyUser !== null) {
+            return res.json({
+                status: "failed",
+                message: "Already registered"
+            })
+        }
+
+        // encrypt password
+        const hashed = await bcrypt.hash(password, 10);
+
+
+        // create new user
+        const newUser = await Usermodule.create({
+            username: username,
+            email: email,
+            password: hashed
+        });
+
+        // generate jwt token
+        const token = jwt.sign({ id: newUser._id }, secretKey);
+
+        return res.status(200).json({
+            status: "success",
+            message: "Signup successfully",
+            token: token
+        })
+
+    } catch (error) {
+        return res.status(409).json({
+            status: "failed",
+            message: "Something went wrong"
+        })
+    }
+});
+
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // first check user is exist or not and if exists then take it out
+        const alreadyuser = await Usermodule.findOne({ email: email })
+
+        if (alreadyuser === null) {
+            res.json({
+                status: "faild",
+                message: "authentication faild"
+            })
+        };
+
+        // if user is registered, then check the password
+
+        const confirmPass = await bcrypt.compare(password, alreadyuser.password);
+        if (confirmPass === false) {
+            res.json({
+                status: "faild",
+                message: "authentication faild"
+            })
+        }
+            // okay, jswon token
+
+            const token = jwt.sign({ id: alreadyuser._id }, secretKey);
+
+            // return respon
+            res.json({
+                status: "success",
+                message: "logged in successfully",
+                token: token
+            })
+
+    } catch (error) {
+
+    }
+})
 
 mongoose.connect("mongodb://127.0.0.1:27017/produt").then(() => {
     app.listen(3001, () => {
