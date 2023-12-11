@@ -43,6 +43,7 @@ function Login(props) {
             // setPassword(0);
           }else if(res.data.status=="faild"){
             alert(res.data.message)
+            // navigator("/signup")
             return;
           }
         })

@@ -41,7 +41,7 @@ function Singnup(props) {
           console.log(res);
           if (res.data.status === "failed") {
               alert(res.data.message);
-              navegate("/login")
+              navegate("/dashboard")
               
             // setTimeout(() => {
             //   // navegate("/login")
