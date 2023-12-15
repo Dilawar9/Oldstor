@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 function Navbar(props) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary ">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary  ">
         <div className="container">
           <a className="navbar-brand" href="/">
             Navbar

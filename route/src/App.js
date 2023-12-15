@@ -111,7 +111,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/card" element={<CardDetail card={card} delete1={delete1} reset={reset} />} />
-
         <Route path="/signup" element={<Singnup setLogin={setLogin} />} />
         <Route path='/login' element={<Login setLogin={setLogin} />} />
         <Route path='/logout' element={<Logout setLogin={setLogin} />} />
