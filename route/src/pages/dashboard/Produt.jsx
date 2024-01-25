@@ -66,7 +66,6 @@ function Produt(props) {
         </tr>
 
         {
-
           posts.map((element, index) => {
             return (
               <tr key={index}>
