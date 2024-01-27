@@ -9,7 +9,6 @@ function Home(props) {
         {/* <button onClick={getPosts}>Get Posts</button> */}
         <div className="container">
           <div className="row">
-           
             {props.posts.map((element, index) => {
               return (
                 <div className="col-md-3 mb-3" key={index}>
